@@ -1,17 +1,18 @@
 function getComputerChoice() {
-    const randomValue = Math.floor(Math.random() * 3);
+    let randomValue = Math.floor(Math.random() * 3);
     if(randomValue === 0) {
         return "rock";
     } else if(randomValue === 1) {
         return "paper";
     } else {
         return "scissors";
-    }    
+    }      
 }
 
-
-
-function playRound(playerSelection, computerSelection) {    
+function playRound() {
+    const computerSelection = getComputerChoice();
+    const playerChoice = prompt("Choose between rock paper or scissors", "");
+    const playerSelection = playerChoice.toLowerCase();
     if(playerSelection === "rock" && computerSelection === "rock") {
         return "It's a tie";
     } else if(playerSelection === "rock" && computerSelection === "paper") {
@@ -33,12 +34,11 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-const computerSelection = getComputerChoice();
-const playerChoice = "rock";
-const playerSelection = playerChoice.toLowerCase();
-alert(playRound(playerSelection, computerSelection))
 
-
-
-
-
+function game() {
+    alert(playRound());
+    alert(playRound());
+    alert(playRound());
+    alert(playRound());
+    alert(playRound());
+}  
