@@ -13,11 +13,7 @@ function playRound() {
   const computerSelection = getComputerChoice();
   const playerChoice = prompt("Choose between rock paper or scissors.", "");
   const playerSelection = playerChoice.toLowerCase();
-  if (
-    (playerSelection === "rock" && computerSelection === "rock") ||
-    (playerSelection === "paper" && computerSelection === "paper") ||
-    (playerSelection === "scissors" && computerSelection === "scissors")
-  ) {
+  if (playerSelection === computerSelection) {
     alert("It's a tie");
     return (result = "tie");
   } else if (playerSelection === "rock" && computerSelection === "paper") {
@@ -41,22 +37,33 @@ function playRound() {
   }
 }
 let result;
-let count = 0;
+let playerCount = 0;
+let computerCount = 0;
 
 function game() {
-  const round = 5;
-  for (let i = 0; i < round; i++) {
+  while (playerCount < 5 && computerCount < 5) {
     console.log(playRound());
-    if (result === "lost" || result === "tie" || result === undefined) {
-      count;
-    } else {
-      count++;
+    if(result === "win") {
+      playerCount++;
+      console.log(playerCount);
+    } else if(result === "lost") {
+      computerCount++;
+      console.log(computerCount);
+    } else if(result === "tie") {
+      continue;     
+    } else if(playerCount === 5 || computerCount === 5) {
+      break;
     }
   }
-  count;
-  if (count >= 3) {
+  if (playerCount === 5) {
     console.log("You won the game!!");
-  } else {
+  } else if(computerCount === 5){
     console.log("You lost the game");
   }
+  return;
+}
+
+function resetGame() {
+  playerCount = 0;
+  computerCount = 0;
 }
