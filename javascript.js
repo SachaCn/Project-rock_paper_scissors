@@ -9,10 +9,18 @@ function getComputerChoice() {
   }
 }
 
+const btn = document.querySelectorAll('button');
+
+
+let playerSelection = btn.forEach(button => button.addEventListener('click', () => {
+  playerSelection = button.textContent.toLowerCase();
+  console.log(playerSelection);
+}))
+
+
+
 function playRound() {
   const computerSelection = getComputerChoice();
-  const playerChoice = prompt("Choose between rock paper or scissors.", "");
-  const playerSelection = playerChoice.toLowerCase();
   if (playerSelection === computerSelection) {
     alert("It's a tie");
     return (result = "tie");
@@ -37,33 +45,15 @@ function playRound() {
   }
 }
 let result;
-let playerCount = 0;
-let computerCount = 0;
 
-function game() {
-  while (playerCount < 5 && computerCount < 5) {
-    console.log(playRound());
-    if(result === "win") {
-      playerCount++;
-      console.log(playerCount);
-    } else if(result === "lost") {
-      computerCount++;
-      console.log(computerCount);
-    } else if(result === "tie") {
-      continue;     
-    } else if(playerCount === 5 || computerCount === 5) {
-      break;
-    }
-  }
-  if (playerCount === 5) {
-    console.log("You won the game!!");
-  } else if(computerCount === 5){
-    console.log("You lost the game");
-  }
-  return;
-}
+btn.forEach(button => button.addEventListener('click', playRound));
 
-function resetGame() {
-  playerCount = 0;
-  computerCount = 0;
-}
+let playerCount = document.getElementById('player-count');
+let computerCount = document.getElementById('computer-count');
+
+console.log(playerCount.textContent)
+
+
+
+
+
