@@ -32,3 +32,15 @@ body {
 #count-container > * {
     font-size: 1.5rem;
 }
+
+#showWinner {
+    font-size: 50px;;
+}
+
+#reset {
+    visibility: hidden;
+}
+
+.active {
+    visibility: visible!important;
+}

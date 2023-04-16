@@ -9,14 +9,15 @@ function getComputerChoice() {
   }
 }
 
-const btn = document.querySelectorAll('button');
+const btn = [...document.getElementsByClassName('btn-js')];
 
 
 let playerSelection = btn.forEach(button => button.addEventListener('click', () => {
   playerSelection = button.textContent.toLowerCase();
-  console.log(playerSelection);
 }))
 
+
+btn.forEach(button => button.addEventListener('click', playRound));
 
 
 function playRound() {
@@ -44,16 +45,54 @@ function playRound() {
     return (result = "win");
   }
 }
+
 let result;
 
-btn.forEach(button => button.addEventListener('click', playRound));
 
-let playerCount = document.getElementById('player-count');
-let computerCount = document.getElementById('computer-count');
+function updateScore() {  
+  if(result === "win") {
+    player += 1;
+    return playerCount.textContent = player;
+  } else if(result === "lost") {
+    cpu +=1;
+    return computerCount.textContent = cpu;
+  }  
+}
 
-console.log(playerCount.textContent)
+const playerCount = document.getElementById('player-count');
+let player = 0;
+
+const computerCount = document.getElementById('computer-count');
+let cpu = 0;
 
 
+btn.forEach(button => button.addEventListener('click', updateScore));
+
+function endGame() {
+  if(player == 5) return showFinalResult.textContent = 'The player win';
+  if(cpu == 5) return showFinalResult.textContent = 'The cpu win';
+}
+
+const showFinalResult = document.getElementById('showWinner');
+
+btn.forEach(button => button.addEventListener('click', endGame));
+btn.forEach(button => button.addEventListener('click', showResetBtn));
+
+function showResetBtn() {
+  if(cpu == 5 || player == 5) return resetBtn.classList.add('active');
+}
 
 
+const resetBtn = document.getElementById('reset');
+
+resetBtn.addEventListener('click', resetGame);
+
+function resetGame() {
+  player = 0;
+  cpu = 0;
+  playerCount.textContent = player;
+  computerCount.textContent = cpu;
+  showFinalResult.textContent = '';
+  resetBtn.classList.remove('active');
+}
 
