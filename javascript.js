@@ -9,8 +9,8 @@ function getComputerChoice() {
   }
 }
 
-const btn = [...document.getElementsByClassName('btn-js')];
 
+const btn = document.querySelectorAll('.btn-js');
 
 let playerSelection = btn.forEach(button => button.addEventListener('click', () => {
   playerSelection = button.textContent.toLowerCase();
