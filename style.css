@@ -33,6 +33,7 @@ body {
     font-size: 1.5rem;
 }
 
+#roundResult,
 #showWinner {
     font-size: 50px;;
 }
@@ -43,4 +44,8 @@ body {
 
 .active {
     visibility: visible!important;
+}
+
+.hide {
+    visibility: hidden;
 }

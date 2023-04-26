@@ -1,3 +1,23 @@
+const btn = document.querySelectorAll('.btn-js');
+const playerCount = document.getElementById('player-count');
+const computerCount = document.getElementById('computer-count');
+const showFinalResult = document.getElementById('showWinner');
+const resetBtn = document.getElementById('reset');
+const roundResult = document.getElementById('roundResult');
+const round = 3;
+let playerSelection = btn.forEach(button => button.addEventListener('click', () => {
+  playerSelection = button.textContent.toLowerCase();
+}))
+let result;
+let player = 0;
+let cpu = 0;
+
+btn.forEach(button => button.addEventListener('click', playRound));
+btn.forEach(button => button.addEventListener('click', updateScore));
+btn.forEach(button => button.addEventListener('click', endGame));
+btn.forEach(button => button.addEventListener('click', showResetBtn));
+resetBtn.addEventListener('click', resetGame);
+
 function getComputerChoice() {
   let randomValue = Math.floor(Math.random() * 3);
   if (randomValue === 0) {
@@ -9,45 +29,31 @@ function getComputerChoice() {
   }
 }
 
-
-const btn = document.querySelectorAll('.btn-js');
-
-let playerSelection = btn.forEach(button => button.addEventListener('click', () => {
-  playerSelection = button.textContent.toLowerCase();
-}))
-
-
-btn.forEach(button => button.addEventListener('click', playRound));
-
-
 function playRound() {
   const computerSelection = getComputerChoice();
   if (playerSelection === computerSelection) {
-    alert("It's a tie");
+    roundResult.textContent = "Tie";    
     return (result = "tie");
   } else if (playerSelection === "rock" && computerSelection === "paper") {
-    alert("You lose! Paper beats Rock");
+    roundResult.textContent = "You lose! Paper beats Rock";    
     return (result = "lost");
   } else if (playerSelection === "rock" && computerSelection === "scissors") {
-    alert("You win! Rock beats Scissors");
+    roundResult.textContent = "You win! Rock beats Scissors";
     return (result = "win");
   } else if (playerSelection === "paper" && computerSelection === "scissors") {
-    alert("You lose! Scissors beats Paper");
+    roundResult.textContent = "You lose! Scissors beats Paper";
     return (result = "lost");
   } else if (playerSelection === "paper" && computerSelection === "rock") {
-    alert("You win! Paper beats Rock");
+    roundResult.textContent = "You win! Paper beats Rock";
     return (result = "win");
   } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    alert("You lose! Rock beats Scissors");
+    roundResult.textContent = "You lose! Rock beats Scissors";
     return (result = "lost");
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    alert("You win! Scissors beats Paper");
+    roundResult.textContent = "You win! Scissors beats Paper";
     return (result = "win");
   }
 }
-
-let result;
-
 
 function updateScore() {  
   if(result === "win") {
@@ -59,33 +65,18 @@ function updateScore() {
   }  
 }
 
-const playerCount = document.getElementById('player-count');
-let player = 0;
-
-const computerCount = document.getElementById('computer-count');
-let cpu = 0;
-
-
-btn.forEach(button => button.addEventListener('click', updateScore));
-
 function endGame() {
-  if(player == 5) return showFinalResult.textContent = 'The player win';
-  if(cpu == 5) return showFinalResult.textContent = 'The cpu win';
+  if(player == round) return showFinalResult.textContent = 'YOU WIN!';
+  if(cpu == round) return showFinalResult.textContent = 'YOU LOSE!';
 }
-
-const showFinalResult = document.getElementById('showWinner');
-
-btn.forEach(button => button.addEventListener('click', endGame));
-btn.forEach(button => button.addEventListener('click', showResetBtn));
 
 function showResetBtn() {
-  if(cpu == 5 || player == 5) return resetBtn.classList.add('active');
+  if(cpu == round || player == round) {
+    btn.forEach(btn => btn.classList.add('hide'));
+    roundResult.classList.add('hide');
+    return resetBtn.classList.add('active');
+  };
 }
-
-
-const resetBtn = document.getElementById('reset');
-
-resetBtn.addEventListener('click', resetGame);
 
 function resetGame() {
   player = 0;
@@ -93,6 +84,8 @@ function resetGame() {
   playerCount.textContent = player;
   computerCount.textContent = cpu;
   showFinalResult.textContent = '';
+  btn.forEach(btn => btn.classList.remove('hide'));
+  roundResult.classList.remove('hide');
   resetBtn.classList.remove('active');
 }
 
